@@ -35,13 +35,13 @@ def cityreader(cities=[]):
     # `cities` list
 
     with open('cities.csv', newline='') as f:
-      reader = csv.reader(f)
+        reader = csv.reader(f)
         # Not including the header
-      next(reader, None)
+        next(reader, None)
         # selecting each the relevant rows in files
-      for row in reader:
+        for row in reader:
             # Creating City instances and adding them to cities list
-        cities.append(City(row[0], row[3], row[4]))
+            cities.append(City(row[0], row[3], row[4]))
     return cities
 
 
@@ -88,8 +88,45 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # within will hold the cities that fall within the specified region
     within = []
 
-    # TODO Ensure that the lat and lon valuse are all floats
-    # Go through each city and check to see if it falls within
-    # the specified coordinates.
+    # # params equate to user input to get min and max values for lat and lon
+    # lat1 = input('First number for lat')
+    # lat2 = input('Second number for lat')
+    # lon1 = input('First number for lon')
+    # lon2 = input('Second number for lon')
+
+# TODO Ensure that the lat and lon valuse are all floats
+# Go through each city and check to see if it falls within
+# the specified coordinates.
+
+# 4 POINTS: should output all the cities that fall within the
+# coordinate square
+# we want to find the greater than numners including the minumum the user enters up until the maximum they enter
+# Everything in-between we want to append to cities (these inbetween the min and max are stored in within)
+    min_lat = min(lat1, lat2)
+    max_lat = max(lat1, lat2)
+    min_lon = min(lat1, lat2)
+    max_lon = max(lat1, lat2)
+
+    for c in cities:
+        # If the city within cities's lat row is greater and equal to  the minimum lat value the user entered then include
+        # If the city within cities lat row is less and equal to  the maximum lat value the user enters include in within
+        if c.lat >= float(min_lat) and c.lat <= float(max_lat):
+            # If the city within cities's lon row is greater or equal to the minimum lon value the user entered then include
+            # If the city within cities lon row is less or equal to  the maximum lon value the user enters include in within
+
+            if c.lon >= float(min_lon) and c.lat <= float(max_lon):
+                within.append(c)
 
     return within
+
+
+ # params equate to user input to get min and max values for lat and lon
+lat1 = input('Min number for lat: ')
+lat2 = input('Max number for lat: ')
+lon1 = input('Min number for lon: ')
+lon2 = input('Max number for lon: ')
+
+
+result = cityreader_stretch(lat1, lon1, lat2, lon2, cities)
+
+print(result)
